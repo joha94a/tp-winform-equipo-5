@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,5 +17,6 @@ namespace App_de_gestion_equipo5
         {
             InitializeComponent();
         }
+
     }
 }

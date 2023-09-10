@@ -44,9 +44,7 @@
     <Compile Include="AccesoDatos.cs" />
     <Compile Include="ArticuloNegocio.cs" />
     <Compile Include="CategoriaNegocio.cs" />
-    <Compile Include="..\..\..\..\PROYECTO WUNFORM - EQUIPO 5- PROGRA 3\tp-winform-equipo-5\MarcaNegocio.cs">
-      <Link>MarcaNegocio.cs</Link>
-    </Compile>
+    <Compile Include="MarcaNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
