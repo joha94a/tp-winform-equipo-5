@@ -14,6 +14,7 @@ namespace App_de_gestion_equipo5
 {
     public partial class SearchCategoriaView : Form
     {
+        private List<Categoria> listaCategorias;
         public SearchCategoriaView()
         {
             InitializeComponent();
@@ -32,7 +33,8 @@ namespace App_de_gestion_equipo5
         private void LoadGrid()
         {
             CategoriaNegocio negocio = new CategoriaNegocio();
-            dgvCategoria.DataSource = negocio.GetAll();
+            listaCategorias = negocio.GetAll();
+            dgvCategoria.DataSource = listaCategorias;
             dgvCategoria.Columns["Id"].Visible = false;
         }
 
@@ -51,6 +53,37 @@ namespace App_de_gestion_equipo5
             CRUDCategoriaView view = new CRUDCategoriaView(cat);
             view.ShowDialog();
             LoadGrid();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("¿Está seguro que desea eliminar este registro?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if(dr == DialogResult.Yes)
+            {
+                Categoria cat;
+                cat = (Categoria)dgvCategoria.CurrentRow.DataBoundItem;
+                CategoriaNegocio negocio = new CategoriaNegocio();
+                negocio.Delete(cat);
+            }
+            LoadGrid();
+        }
+
+        private void txtDescripcion_TextChanged(object sender, EventArgs e)
+        {
+
+            List<Categoria> categoriasFiltradas;
+            string filtro = txtDescripcion.Text;
+
+            if (filtro != "")
+            {
+                categoriasFiltradas = listaCategorias.FindAll(c => c.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+            }
+            else
+            {
+                categoriasFiltradas = listaCategorias;
+            }
+            dgvCategoria.DataSource = categoriasFiltradas;
+            dgvCategoria.Columns["Id"].Visible = false;
         }
     }
 }

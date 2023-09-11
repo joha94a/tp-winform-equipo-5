@@ -14,7 +14,7 @@ namespace App_de_gestion_equipo5
 {
     public partial class CRUDCategoriaView : Form
     {
-        private Categoria obj = null;
+        private Categoria obj = new Categoria();
         public CRUDCategoriaView()
         {
             InitializeComponent();
@@ -31,7 +31,7 @@ namespace App_de_gestion_equipo5
 
             if(string.IsNullOrEmpty(descripcion))
             {
-                MessageBox.Show("El campo 'Descripción' es obligatorio.", "Error");
+                MessageBox.Show("El campo 'Descripción' es obligatorio.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
