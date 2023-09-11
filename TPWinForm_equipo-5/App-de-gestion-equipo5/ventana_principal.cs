@@ -36,8 +36,8 @@ namespace App_de_gestion_equipo5
 
         private void btnCategoria_Click(object sender, EventArgs e)
         {
-            CRUDCategoriaView crud = new CRUDCategoriaView();
-            crud.ShowDialog();
+            SearchCategoriaView view = new SearchCategoriaView();
+            view.ShowDialog();
         }
     }
 }

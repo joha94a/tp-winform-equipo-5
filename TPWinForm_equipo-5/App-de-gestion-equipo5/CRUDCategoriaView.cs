@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dominio;
+using Negocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,15 +14,53 @@ namespace App_de_gestion_equipo5
 {
     public partial class CRUDCategoriaView : Form
     {
+        private Categoria obj = null;
         public CRUDCategoriaView()
         {
             InitializeComponent();
         }
-
-        private void btnBuscar_Click(object sender, EventArgs e)
+        public CRUDCategoriaView(Categoria obj)
         {
-            SearchCategoriaView search = new SearchCategoriaView();
-            search.ShowDialog();
+            InitializeComponent();
+            this.obj = obj;
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            string descripcion = txtDescripcion.Text;
+
+            if(string.IsNullOrEmpty(descripcion))
+            {
+                MessageBox.Show("El campo 'Descripción' es obligatorio.", "Error");
+                return;
+            }
+
+            CategoriaNegocio negocio = new CategoriaNegocio();
+
+            obj.Descripcion = txtDescripcion.Text;
+            bool guardo = negocio.Save(obj);
+
+            if(guardo)
+            {
+                MessageBox.Show("Guardado Exitoso.", "Éxito");
+            }
+            else
+            {
+                MessageBox.Show("Ocurrió un error al guardar los datos.", "Error");
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            txtDescripcion.Text = obj.Descripcion;
+        }
+
+        private void CRUDCategoriaView_Load(object sender, EventArgs e)
+        {
+            if(obj != null)
+            {
+                txtDescripcion.Text = obj.Descripcion;
+            }
         }
     }
 }
