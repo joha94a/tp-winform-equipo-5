@@ -62,5 +62,10 @@ namespace App_de_gestion_equipo5
                 txtDescripcion.Text = obj.Descripcion;
             }
         }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
