@@ -139,6 +139,7 @@ namespace App_de_gestion_equipo5
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.lblDescripcion);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "CRUDCategoriaView";
             this.Text = "CRUDCategoriaView";
             this.Load += new System.EventHandler(this.CRUDCategoriaView_Load);

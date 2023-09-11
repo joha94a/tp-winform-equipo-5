@@ -42,6 +42,7 @@ namespace App_de_gestion_equipo5
         {
             CRUDCategoriaView view = new CRUDCategoriaView();
             view.ShowDialog();
+
             LoadGrid();
         }
 
@@ -57,11 +58,15 @@ namespace App_de_gestion_equipo5
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            Categoria cat;
+            cat = (Categoria)dgvCategoria.CurrentRow.DataBoundItem;
+            //if (ValidarCategoriaEnUso(cat))
+            //{
+            //    MessageBox.Show("La categoría que intenta eliminar está siendo utilizada por un artículo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //}
             DialogResult dr = MessageBox.Show("¿Está seguro que desea eliminar este registro?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if(dr == DialogResult.Yes)
             {
-                Categoria cat;
-                cat = (Categoria)dgvCategoria.CurrentRow.DataBoundItem;
                 CategoriaNegocio negocio = new CategoriaNegocio();
                 negocio.Delete(cat);
             }

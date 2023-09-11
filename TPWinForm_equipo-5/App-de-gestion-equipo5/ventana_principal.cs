@@ -37,7 +37,13 @@ namespace App_de_gestion_equipo5
         private void btnCategoria_Click(object sender, EventArgs e)
         {
             SearchCategoriaView view = new SearchCategoriaView();
-            view.ShowDialog();
+            //view.ShowDialog();
+            view.TopLevel = false; // Esto permite que la ventana hija se comporte como un control
+            view.Dock = DockStyle.Fill; // Estira la ventana hija para llenar el Panel
+            panel_ventanas.Controls.Add(view); // Agrega la ventana hija al Panel
+            //ventana_art.MdiParent = this;
+            view.Show();
+            panel_menu.Enabled = false;
         }
     }
 }

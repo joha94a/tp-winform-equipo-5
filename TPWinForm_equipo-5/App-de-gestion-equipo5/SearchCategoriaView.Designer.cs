@@ -38,6 +38,7 @@ namespace App_de_gestion_equipo5
             this.btnEliminar = new System.Windows.Forms.Button();
             this.pnlTitleBar = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.panel_ventanas = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategoria)).BeginInit();
             this.pnlTitleBar.SuspendLayout();
             this.SuspendLayout();
@@ -141,6 +142,7 @@ namespace App_de_gestion_equipo5
             // pnlTitleBar
             // 
             this.pnlTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.pnlTitleBar.Controls.Add(this.panel_ventanas);
             this.pnlTitleBar.Controls.Add(this.lblTitle);
             this.pnlTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTitleBar.Location = new System.Drawing.Point(0, 0);
@@ -160,6 +162,16 @@ namespace App_de_gestion_equipo5
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "CATEGORÍAS";
             // 
+            // panel_ventanas
+            // 
+            this.panel_ventanas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_ventanas.Location = new System.Drawing.Point(0, 0);
+            this.panel_ventanas.Name = "panel_ventanas";
+            this.panel_ventanas.Size = new System.Drawing.Size(800, 451);
+            this.panel_ventanas.TabIndex = 10;
+            // 
             // SearchCategoriaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -174,6 +186,7 @@ namespace App_de_gestion_equipo5
             this.Controls.Add(this.dgvCategoria);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnVer);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SearchCategoriaView";
             this.Text = "SearchCategoriaView";
             this.Load += new System.EventHandler(this.SearchCategoriaView_Load);
@@ -195,5 +208,6 @@ namespace App_de_gestion_equipo5
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Panel pnlTitleBar;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Panel panel_ventanas;
     }
 }
