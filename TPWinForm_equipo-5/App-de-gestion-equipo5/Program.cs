@@ -16,7 +16,7 @@ namespace App_de_gestion_equipo5
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Ventana_principal());
+            Application.Run(new ventana_principal());
         }
     }
 }
