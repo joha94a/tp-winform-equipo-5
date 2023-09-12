@@ -52,6 +52,12 @@
     <Compile Include="CRUDCategoriaView.Designer.cs">
       <DependentUpon>CRUDCategoriaView.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMarcaDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMarcaDetalle.Designer.cs">
+      <DependentUpon>frmMarcaDetalle.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMarcas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     </Compile>
     <EmbeddedResource Include="CRUDCategoriaView.resx">
       <DependentUpon>CRUDCategoriaView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMarcaDetalle.resx">
+      <DependentUpon>frmMarcaDetalle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMarcas.resx">
       <DependentUpon>frmMarcas.cs</DependentUpon>

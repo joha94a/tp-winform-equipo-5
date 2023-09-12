@@ -23,9 +23,9 @@ namespace Negocio
                 {
                     Marca marca = new Marca();
 
-                    marca.id = (int)datos.Lector["Id"];
+                    marca.Id = (int)datos.Lector["Id"];
                     if (!(datos.Lector["Descripcion"] is DBNull))
-                        marca.descripcion = (string)datos.Lector["Descripcion"];
+                        marca.Descripcion = (string)datos.Lector["Descripcion"];
 
                     lista.Add(marca);
                 }

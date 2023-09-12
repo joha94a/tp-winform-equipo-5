@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,9 @@ namespace Dominio
 {
     public class Marca
     {
-        public int id { get; set; }
-        public string descripcion { get; set; }
+        public int Id { get; set; }
+
+        [DisplayName("Descripción")]
+        public string Descripcion { get; set; }
     }
 }

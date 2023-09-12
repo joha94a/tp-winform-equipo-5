@@ -140,6 +140,7 @@
             this.dgvMarcas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMarcas.Size = new System.Drawing.Size(711, 192);
             this.dgvMarcas.TabIndex = 13;
+            this.dgvMarcas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMarcas_CellDoubleClick);
             // 
             // btnEliminar
             // 
@@ -197,6 +198,7 @@
             this.btnVer.TabIndex = 14;
             this.btnVer.Text = "VER";
             this.btnVer.UseVisualStyleBackColor = false;
+            this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
             // 
             // btnEditar
             // 
