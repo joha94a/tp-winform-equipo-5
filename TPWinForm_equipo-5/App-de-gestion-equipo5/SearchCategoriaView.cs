@@ -42,14 +42,17 @@ namespace App_de_gestion_equipo5
         {
             CRUDCategoriaView view = new CRUDCategoriaView();
             view.ShowDialog();
-
             LoadGrid();
         }
 
         private void btnVer_Click(object sender, EventArgs e)
         {
-            Categoria cat;
-            cat = (Categoria)dgvCategoria.CurrentRow.DataBoundItem;
+            CategoriaNavigate();
+        }
+
+        private void CategoriaNavigate()
+        {
+            Categoria cat = (Categoria)dgvCategoria.CurrentRow.DataBoundItem;
 
             CRUDCategoriaView view = new CRUDCategoriaView(cat);
             view.ShowDialog();
@@ -69,8 +72,8 @@ namespace App_de_gestion_equipo5
             {
                 CategoriaNegocio negocio = new CategoriaNegocio();
                 negocio.Delete(cat);
+                LoadGrid();
             }
-            LoadGrid();
         }
 
         private void txtDescripcion_TextChanged(object sender, EventArgs e)
@@ -89,6 +92,11 @@ namespace App_de_gestion_equipo5
             }
             dgvCategoria.DataSource = categoriasFiltradas;
             dgvCategoria.Columns["Id"].Visible = false;
+        }
+
+        private void dgvCategoria_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            CategoriaNavigate();
         }
     }
 }

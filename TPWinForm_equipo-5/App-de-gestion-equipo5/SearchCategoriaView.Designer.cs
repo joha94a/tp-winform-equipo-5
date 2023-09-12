@@ -41,6 +41,7 @@ namespace App_de_gestion_equipo5
             this.pnlTitleBar = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.panel_ventanas = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategoria)).BeginInit();
             this.pnlTitleBar.SuspendLayout();
             this.SuspendLayout();
@@ -112,6 +113,7 @@ namespace App_de_gestion_equipo5
             this.dgvCategoria.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCategoria.Size = new System.Drawing.Size(763, 218);
             this.dgvCategoria.TabIndex = 4;
+            this.dgvCategoria.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategoria_CellDoubleClick);
             // 
             // lblDescripcion
             // 
@@ -157,6 +159,7 @@ namespace App_de_gestion_equipo5
             // pnlTitleBar
             // 
             this.pnlTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.pnlTitleBar.Controls.Add(this.panel_ventanas);
             this.pnlTitleBar.Controls.Add(this.lblTitle);
             this.pnlTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTitleBar.Location = new System.Drawing.Point(0, 0);
@@ -188,6 +191,16 @@ namespace App_de_gestion_equipo5
             this.txtDescripcion.Size = new System.Drawing.Size(206, 30);
             this.txtDescripcion.TabIndex = 5;
             this.txtDescripcion.TextChanged += new System.EventHandler(this.txtDescripcion_TextChanged);
+            // 
+            // panel_ventanas
+            // 
+            this.panel_ventanas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_ventanas.Location = new System.Drawing.Point(0, 77);
+            this.panel_ventanas.Name = "panel_ventanas";
+            this.panel_ventanas.Size = new System.Drawing.Size(840, 395);
+            this.panel_ventanas.TabIndex = 10;
             // 
             // SearchCategoriaView
             // 
@@ -225,5 +238,6 @@ namespace App_de_gestion_equipo5
         private System.Windows.Forms.Panel pnlTitleBar;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.TextBox txtDescripcion;
+        private System.Windows.Forms.Panel panel_ventanas;
     }
 }
