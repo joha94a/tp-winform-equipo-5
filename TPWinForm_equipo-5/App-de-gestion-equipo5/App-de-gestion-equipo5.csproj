@@ -52,6 +52,12 @@
     <Compile Include="CRUDCategoriaView.Designer.cs">
       <DependentUpon>CRUDCategoriaView.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMarcas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMarcas.Designer.cs">
+      <DependentUpon>frmMarcas.cs</DependentUpon>
+    </Compile>
     <Compile Include="SearchCategoriaView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     </Compile>
     <EmbeddedResource Include="CRUDCategoriaView.resx">
       <DependentUpon>CRUDCategoriaView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMarcas.resx">
+      <DependentUpon>frmMarcas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchCategoriaView.resx">
       <DependentUpon>SearchCategoriaView.cs</DependentUpon>

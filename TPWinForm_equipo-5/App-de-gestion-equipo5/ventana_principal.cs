@@ -45,5 +45,15 @@ namespace App_de_gestion_equipo5
             view.Show();
             panel_menu.Enabled = false;
         }
+
+        private void btnMarcas_Click(object sender, EventArgs e)
+        {
+            frmMarcas formMarcas = new frmMarcas();
+            formMarcas.TopLevel = false;
+            formMarcas.Dock = DockStyle.Fill;
+            panel_ventanas.Controls.Add(formMarcas);
+            formMarcas.Show();
+            panel_menu.Enabled = false;
+        }
     }
 }

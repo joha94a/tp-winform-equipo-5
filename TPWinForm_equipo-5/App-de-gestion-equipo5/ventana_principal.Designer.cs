@@ -36,6 +36,7 @@
             this.panel_ventanas = new System.Windows.Forms.Panel();
             this.panel_menu = new System.Windows.Forms.Panel();
             this.btnCategoria = new System.Windows.Forms.Button();
+            this.btnMarcas = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel_menu.SuspendLayout();
             this.SuspendLayout();
@@ -99,6 +100,7 @@
             this.panel_menu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel_menu.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel_menu.Controls.Add(this.btnMarcas);
             this.panel_menu.Controls.Add(this.btnCategoria);
             this.panel_menu.Controls.Add(this.link_articulos);
             this.panel_menu.Location = new System.Drawing.Point(0, 27);
@@ -115,6 +117,16 @@
             this.btnCategoria.Text = "CATEGORÍAS";
             this.btnCategoria.UseVisualStyleBackColor = true;
             this.btnCategoria.Click += new System.EventHandler(this.btnCategoria_Click);
+            // 
+            // btnMarcas
+            // 
+            this.btnMarcas.Location = new System.Drawing.Point(0, 140);
+            this.btnMarcas.Name = "btnMarcas";
+            this.btnMarcas.Size = new System.Drawing.Size(191, 23);
+            this.btnMarcas.TabIndex = 2;
+            this.btnMarcas.Text = "MARCAS";
+            this.btnMarcas.UseVisualStyleBackColor = true;
+            this.btnMarcas.Click += new System.EventHandler(this.btnMarcas_Click);
             // 
             // ventana_principal
             // 
@@ -150,6 +162,7 @@
         private System.Windows.Forms.Panel panel_ventanas;
         private System.Windows.Forms.Panel panel_menu;
         private System.Windows.Forms.Button btnCategoria;
+        private System.Windows.Forms.Button btnMarcas;
     }
 }
 
