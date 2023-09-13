@@ -28,31 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.link_articulos = new System.Windows.Forms.LinkLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_ventanas = new System.Windows.Forms.Panel();
             this.panel_menu = new System.Windows.Forms.Panel();
-            this.btnCategoria = new System.Windows.Forms.Button();
             this.btnMarcas = new System.Windows.Forms.Button();
+            this.btnCategoria = new System.Windows.Forms.Button();
+            this.button_articulos = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel_menu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // link_articulos
-            // 
-            this.link_articulos.AutoSize = true;
-            this.link_articulos.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.link_articulos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.link_articulos.Location = new System.Drawing.Point(34, 49);
-            this.link_articulos.Name = "link_articulos";
-            this.link_articulos.Size = new System.Drawing.Size(115, 24);
-            this.link_articulos.TabIndex = 0;
-            this.link_articulos.TabStop = true;
-            this.link_articulos.Text = "ARTICULOS";
-            this.link_articulos.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_articulos_LinkClicked);
             // 
             // menuStrip1
             // 
@@ -99,34 +86,61 @@
             // 
             this.panel_menu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel_menu.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel_menu.BackColor = System.Drawing.SystemColors.Highlight;
+            this.panel_menu.Controls.Add(this.button_articulos);
             this.panel_menu.Controls.Add(this.btnMarcas);
             this.panel_menu.Controls.Add(this.btnCategoria);
-            this.panel_menu.Controls.Add(this.link_articulos);
             this.panel_menu.Location = new System.Drawing.Point(0, 27);
             this.panel_menu.Name = "panel_menu";
             this.panel_menu.Size = new System.Drawing.Size(191, 302);
             this.panel_menu.TabIndex = 4;
             // 
-            // btnCategoria
-            // 
-            this.btnCategoria.Location = new System.Drawing.Point(0, 107);
-            this.btnCategoria.Name = "btnCategoria";
-            this.btnCategoria.Size = new System.Drawing.Size(191, 23);
-            this.btnCategoria.TabIndex = 1;
-            this.btnCategoria.Text = "CATEGORÍAS";
-            this.btnCategoria.UseVisualStyleBackColor = true;
-            this.btnCategoria.Click += new System.EventHandler(this.btnCategoria_Click);
-            // 
             // btnMarcas
             // 
-            this.btnMarcas.Location = new System.Drawing.Point(0, 140);
+            this.btnMarcas.BackColor = System.Drawing.Color.LightYellow;
+            this.btnMarcas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMarcas.FlatAppearance.BorderSize = 0;
+            this.btnMarcas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMarcas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMarcas.Location = new System.Drawing.Point(0, 178);
             this.btnMarcas.Name = "btnMarcas";
-            this.btnMarcas.Size = new System.Drawing.Size(191, 23);
+            this.btnMarcas.Size = new System.Drawing.Size(191, 43);
             this.btnMarcas.TabIndex = 2;
             this.btnMarcas.Text = "MARCAS";
-            this.btnMarcas.UseVisualStyleBackColor = true;
+            this.btnMarcas.UseVisualStyleBackColor = false;
             this.btnMarcas.Click += new System.EventHandler(this.btnMarcas_Click);
+            // 
+            // btnCategoria
+            // 
+            this.btnCategoria.BackColor = System.Drawing.Color.LightYellow;
+            this.btnCategoria.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCategoria.FlatAppearance.BorderSize = 0;
+            this.btnCategoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCategoria.Location = new System.Drawing.Point(0, 115);
+            this.btnCategoria.Name = "btnCategoria";
+            this.btnCategoria.Size = new System.Drawing.Size(191, 43);
+            this.btnCategoria.TabIndex = 1;
+            this.btnCategoria.Text = "CATEGORÍAS";
+            this.btnCategoria.UseVisualStyleBackColor = false;
+            this.btnCategoria.Click += new System.EventHandler(this.btnCategoria_Click);
+            // 
+            // button_articulos
+            // 
+            this.button_articulos.BackColor = System.Drawing.Color.LightYellow;
+            this.button_articulos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_articulos.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button_articulos.FlatAppearance.BorderSize = 0;
+            this.button_articulos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_articulos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_articulos.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.button_articulos.Location = new System.Drawing.Point(0, 46);
+            this.button_articulos.Name = "button_articulos";
+            this.button_articulos.Size = new System.Drawing.Size(191, 43);
+            this.button_articulos.TabIndex = 3;
+            this.button_articulos.Text = "ARTÍCULOS";
+            this.button_articulos.UseVisualStyleBackColor = false;
+            this.button_articulos.Click += new System.EventHandler(this.button_articulos_Click);
             // 
             // ventana_principal
             // 
@@ -146,15 +160,12 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel_menu.ResumeLayout(false);
-            this.panel_menu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.LinkLabel link_articulos;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verToolStripMenuItem;
@@ -163,6 +174,7 @@
         private System.Windows.Forms.Panel panel_menu;
         private System.Windows.Forms.Button btnCategoria;
         private System.Windows.Forms.Button btnMarcas;
+        private System.Windows.Forms.Button button_articulos;
     }
 }
 

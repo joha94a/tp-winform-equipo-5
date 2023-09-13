@@ -38,5 +38,12 @@ namespace App_de_gestion_equipo5
 
 
         }
+
+        private void button_agregar_Click(object sender, EventArgs e)
+        {
+            frmArticuloAgregar ventanaAgregar = new frmArticuloAgregar();
+            ventanaAgregar.ShowDialog();
+
+        }
     }
 }
