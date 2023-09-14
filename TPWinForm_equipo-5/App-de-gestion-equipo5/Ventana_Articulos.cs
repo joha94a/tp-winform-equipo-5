@@ -45,5 +45,15 @@ namespace App_de_gestion_equipo5
             ventanaAgregar.ShowDialog();
 
         }
+
+        private void button_modificar_Click(object sender, EventArgs e)
+        {
+            Articulo articulo;
+            articulo = (Articulo)dataGridV_articulos.CurrentRow.DataBoundItem;
+            frmArticuloAgregar modificar = new frmArticuloAgregar(articulo);
+            modificar.ShowDialog();
+
+
+        }
     }
 }

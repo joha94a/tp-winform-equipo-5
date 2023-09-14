@@ -90,6 +90,7 @@
             this.button_modificar.TabIndex = 3;
             this.button_modificar.Text = "MODIFICAR";
             this.button_modificar.UseVisualStyleBackColor = false;
+            this.button_modificar.Click += new System.EventHandler(this.button_modificar_Click);
             // 
             // button_eliminar
             // 

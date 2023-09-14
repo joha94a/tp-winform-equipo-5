@@ -14,9 +14,18 @@ namespace App_de_gestion_equipo5
 {
     public partial class frmArticuloAgregar : Form
     {
+
+        private Articulo articulo = null;
+
         public frmArticuloAgregar()
         {
             InitializeComponent();
+        }
+
+        public frmArticuloAgregar(Articulo articulo)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
         }
 
         private void frmArticuloAgregar_Load(object sender, EventArgs e)
@@ -26,7 +35,22 @@ namespace App_de_gestion_equipo5
             try 
             {
                 cb_categoria.DataSource = categoriaNegocio.GetAll();
+                cb_categoria.ValueMember = "Id";
+                cb_categoria.DisplayMember = "Descripcion";
                 cb_marca.DataSource = marcaNegocio.listar();
+                cb_marca.ValueMember = "Id";
+                cb_marca.DisplayMember = "Descripcion";
+
+                if (articulo != null)
+                {
+                    textBox_codigo.Text = articulo.Codigo;
+                    textBox_nombre.Text = articulo.Nombre;
+                    textBox_descrip.Text = articulo.Descripcion;
+                    cb_categoria.SelectedValue = articulo.Categoria.Id;
+                    cb_marca.SelectedValue = articulo.Marca.Id;
+                    textBox_precio.Text = articulo.Precio.ToString();
+
+                }
 
             }
             catch (Exception ex) 

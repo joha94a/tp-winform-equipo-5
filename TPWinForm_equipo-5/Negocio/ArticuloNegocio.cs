@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
@@ -16,15 +17,23 @@ namespace Negocio
 
             try
             {
-                accesoDatos.setearConsulta("select codigo, nombre, precio from ARTICULOS");
+                accesoDatos.setearConsulta("select A.Id, Codigo, Nombre, A.Descripcion, Precio, M.Id, M.Descripcion marca, C.Id, C.Descripcion categoria, IdMarca, IdCategoria from ARTICULOS A, MARCAS M, CATEGORIAS C where M.Id = A.IdMarca AND C.Id = A.IdCategoria;");
                 accesoDatos.ejecutarLectura();
 
                 while (accesoDatos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
                     aux.Codigo = (string) accesoDatos.Lector["codigo"];
-                    aux.Nombre = (string) accesoDatos.Lector["nombre"];
+                    aux.Nombre = (string)accesoDatos.Lector["nombre"];
+                    aux.Descripcion = (string)accesoDatos.Lector["descripcion"];
                     aux.Precio = (decimal) accesoDatos.Lector["precio"];
+
+                    aux.Marca = new Marca();
+                    aux.Marca.Id = (int)accesoDatos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)accesoDatos.Lector["marca"];
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.Id = (int)accesoDatos.Lector["IdCategoria"];
+                    aux.Categoria.Descripcion = (string)accesoDatos.Lector["categoria"];
 
                     articulos.Add(aux);
                 }
