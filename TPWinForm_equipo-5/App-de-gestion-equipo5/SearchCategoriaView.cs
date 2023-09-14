@@ -52,11 +52,14 @@ namespace App_de_gestion_equipo5
 
         private void CategoriaNavigate()
         {
-            Categoria cat = (Categoria)dgvCategoria.CurrentRow.DataBoundItem;
+            if(dgvCategoria.CurrentRow != null)
+            {
+                Categoria cat = (Categoria)dgvCategoria.CurrentRow.DataBoundItem;
 
-            CRUDCategoriaView view = new CRUDCategoriaView(cat);
-            view.ShowDialog();
-            LoadGrid();
+                CRUDCategoriaView view = new CRUDCategoriaView(cat);
+                view.ShowDialog();
+                LoadGrid();
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
