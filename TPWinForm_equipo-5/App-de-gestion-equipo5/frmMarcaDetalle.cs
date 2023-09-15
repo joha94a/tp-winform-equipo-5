@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,22 +14,81 @@ namespace App_de_gestion_equipo5
 {
     public partial class frmMarcaDetalle : Form
     {
-        private Marca marca = new Marca();
+        private Marca marca = null;
+        private bool soloLectura = false;
 
         public frmMarcaDetalle()
         {
             InitializeComponent();
         }
 
-        public frmMarcaDetalle(Marca m)
+        public frmMarcaDetalle(Marca m, bool soloLectura)
         {
             InitializeComponent();
             this.marca = m;
+            this.soloLectura = soloLectura;
         }
 
         private void frmMarcaDetalle_Load(object sender, EventArgs e)
         {
-            txtDescripcion.Text = marca.Descripcion;
+            if (soloLectura)
+            {
+                lblTitulo.Text = "MARCA - VER";
+                txtDescripcion.ReadOnly = true;
+                btnCancelar.Visible = false;
+            }
+            else if (this.marca != null)
+            {
+                lblTitulo.Text = "MARCA - MODIFICAR";
+            }
+            else
+            {
+                lblTitulo.Text = "MARCA - AGREGAR";
+            }
+
+            if (this.marca != null)
+            {
+                txtDescripcion.Text = marca.Descripcion;
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            if (soloLectura)
+            {
+                this.Close();
+                return;
+            }
+
+            MarcaNegocio negocio = new MarcaNegocio();
+
+            try
+            {
+                if (marca == null)
+                    marca = new Marca();
+                marca.Descripcion = txtDescripcion.Text;
+
+                if (marca.Id != 0)
+                {
+                    negocio.modificar(marca);
+                    MessageBox.Show("Modificado exitosamente.");
+                }
+                else
+                {
+                    negocio.agregar(marca);
+                    MessageBox.Show("Agregado exitosamente.");
+                }
+                Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

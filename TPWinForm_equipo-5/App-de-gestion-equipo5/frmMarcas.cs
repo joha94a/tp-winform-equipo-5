@@ -31,6 +31,7 @@ namespace App_de_gestion_equipo5
             MarcaNegocio negocio = new MarcaNegocio();
             listaMarcas = negocio.listar();
             dgvMarcas.DataSource = listaMarcas;
+            dgvMarcas.ClearSelection();
             ocultarColumnas();
         }
 
@@ -49,6 +50,7 @@ namespace App_de_gestion_equipo5
             }
             dgvMarcas.DataSource = null;
             dgvMarcas.DataSource = marcasFiltradas;
+            dgvMarcas.ClearSelection();
             ocultarColumnas();
         }
 
@@ -76,17 +78,71 @@ namespace App_de_gestion_equipo5
         {
             verMarca();
         }
+
         private void verMarca()
         {
-            if(dgvMarcas.CurrentRow.DataBoundItem != null)
+            if(dgvMarcas.CurrentRow != null)
             {
                 Marca m = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
-                frmMarcaDetalle frmDetalle = new frmMarcaDetalle(m);
+                frmMarcaDetalle frmDetalle = new frmMarcaDetalle(m,true);
                 frmDetalle.ShowDialog();
             }
             else
             {
                 MessageBox.Show("Debe seleccionar una fila.");
+            }
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dgvMarcas.CurrentRow != null)
+            {
+                Marca m = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
+                frmMarcaDetalle frmDetalle = new frmMarcaDetalle(m, false);
+                frmDetalle.ShowDialog();
+                cargarMarcas();
+                filtrarMarcas();
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar una fila.");
+            }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmMarcaDetalle frmDetalle = new frmMarcaDetalle();
+            frmDetalle.ShowDialog();
+            cargarMarcas();
+            filtrarMarcas();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            MarcaNegocio negocio = new MarcaNegocio();
+            Marca marca;
+            try
+            {
+                if (dgvMarcas.CurrentRow != null)
+                {
+                    marca = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
+                    DialogResult respuesta = MessageBox.Show("Está seguro que desea eliminar?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if(respuesta == DialogResult.Yes)
+                    {
+                        negocio.eliminar(marca.Id);
+                        MessageBox.Show("Marca eliminada exitosamente.");
+                        cargarMarcas();
+                        filtrarMarcas();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar una fila.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }
