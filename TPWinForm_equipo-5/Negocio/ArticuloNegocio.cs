@@ -23,6 +23,7 @@ namespace Negocio
                 while (accesoDatos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
+                    aux.Id = (int)accesoDatos.Lector["Id"];
                     aux.Codigo = (string) accesoDatos.Lector["codigo"];
                     aux.Nombre = (string)accesoDatos.Lector["nombre"];
                     aux.Descripcion = (string)accesoDatos.Lector["descripcion"];
@@ -73,6 +74,32 @@ namespace Negocio
             finally 
             {
                 accesoDatos.cerrarConexion();
+            }
+        }
+
+        public void modificar(Articulo articulo)
+        {
+            AccesoDatos accesoDatos = new AccesoDatos();
+            try
+            {
+                accesoDatos.setearConsulta("UPDATE ARTICULOS SET Codigo = @codigo, Nombre = @nombre, Descripcion = @descr, IdMarca = @idMarca, IdCategoria = @idCateg, Precio = @precio where Id = @Id");
+                accesoDatos.setearParametro("@codigo", articulo.Codigo);
+                accesoDatos.setearParametro("@nombre", articulo.Nombre);
+                accesoDatos.setearParametro("@descr", articulo.Descripcion);
+                accesoDatos.setearParametro("@idMarca", articulo.Marca.Id);
+                accesoDatos.setearParametro("@idCateg", articulo.Categoria.Id);
+                accesoDatos.setearParametro("@precio", articulo.Precio);
+                accesoDatos.setearParametro("@Id", articulo.Id);
+
+                accesoDatos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                 accesoDatos.cerrarConexion();
             }
         }
     }

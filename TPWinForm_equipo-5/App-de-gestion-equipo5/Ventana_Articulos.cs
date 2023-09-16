@@ -27,15 +27,7 @@ namespace App_de_gestion_equipo5
 
         private void Ventana_Articulos_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
-
-            dataGridV_articulos.DataSource = articuloNegocio.listarArticulos();
-            dataGridV_articulos.Columns["descripcion"].Visible = false;
-            dataGridV_articulos.Columns["marca"].Visible = false;
-            dataGridV_articulos.Columns["categoria"].Visible = false;
-
-            dataGridV_articulos.Columns["precio"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
+            cargar();
 
         }
 
@@ -43,6 +35,7 @@ namespace App_de_gestion_equipo5
         {
             frmArticuloAgregar ventanaAgregar = new frmArticuloAgregar();
             ventanaAgregar.ShowDialog();
+            cargar();
 
         }
 
@@ -52,7 +45,26 @@ namespace App_de_gestion_equipo5
             articulo = (Articulo)dataGridV_articulos.CurrentRow.DataBoundItem;
             frmArticuloAgregar modificar = new frmArticuloAgregar(articulo);
             modificar.ShowDialog();
+            cargar();
 
+        }
+
+        private void cargar()
+        {
+            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+            try
+            {
+                dataGridV_articulos.DataSource = articuloNegocio.listarArticulos();
+                dataGridV_articulos.Columns["descripcion"].Visible = false;
+                dataGridV_articulos.Columns["marca"].Visible = false;
+                dataGridV_articulos.Columns["categoria"].Visible = false;
+
+                dataGridV_articulos.Columns["precio"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
         }
     }

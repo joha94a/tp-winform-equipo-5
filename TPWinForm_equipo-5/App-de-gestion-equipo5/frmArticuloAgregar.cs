@@ -26,6 +26,8 @@ namespace App_de_gestion_equipo5
         {
             InitializeComponent();
             this.articulo = articulo;
+            Text = "Modificar artículo";
+            
         }
 
         private void frmArticuloAgregar_Load(object sender, EventArgs e)
@@ -61,11 +63,17 @@ namespace App_de_gestion_equipo5
 
         private void button_agregar_art_Click(object sender, EventArgs e)
         {
-            Articulo articulo = new Articulo();
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+            bool agregar = false;
 
             try 
             {
+                if(articulo == null)
+                {
+                    articulo = new Articulo();
+                    agregar = true;
+                }
+
                 articulo.Codigo = textBox_codigo.Text;
                 articulo.Nombre = textBox_nombre.Text;
                 articulo.Descripcion = textBox_descrip.Text;
@@ -73,8 +81,18 @@ namespace App_de_gestion_equipo5
                 articulo.Marca = (Marca) cb_marca.SelectedItem;
                 articulo.Precio = decimal.Parse(textBox_precio.Text);
 
-                articuloNegocio.agregar(articulo);
-                MessageBox.Show("Artículo agregado exitosamente");
+                if (agregar)
+                {
+                    articuloNegocio.agregar(articulo);
+                    MessageBox.Show("Artículo agregado exitosamente");
+                }
+                else
+                {
+                    articuloNegocio.modificar(articulo);
+                    MessageBox.Show("Artículo modificado exitosamente");
+                }
+
+                agregar = false;
                 Close();
             }
             catch (Exception ex) 
