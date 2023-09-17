@@ -58,6 +58,12 @@
     <Compile Include="frmArticuloAgregar.Designer.cs">
       <DependentUpon>frmArticuloAgregar.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmImagenAgregar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImagenAgregar.Designer.cs">
+      <DependentUpon>frmImagenAgregar.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMarcaDetalle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,11 @@
     </Compile>
     <Compile Include="frmMarcas.Designer.cs">
       <DependentUpon>frmMarcas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SearchCategoriaView.cs">
       <SubType>Form</SubType>
@@ -96,6 +107,9 @@
     <EmbeddedResource Include="frmArticuloAgregar.resx">
       <DependentUpon>frmArticuloAgregar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmImagenAgregar.resx">
+      <DependentUpon>frmImagenAgregar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMarcaDetalle.resx">
       <DependentUpon>frmMarcaDetalle.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,13 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Ventana_Articulos.resx">
       <DependentUpon>Ventana_Articulos.cs</DependentUpon>
     </EmbeddedResource>
@@ -142,6 +152,10 @@
       <Project>{c3c3abe0-7eb6-46cb-9139-2a0f2de817a9}</Project>
       <Name>Negocio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\add-image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Dominio;
 
@@ -17,24 +18,39 @@ namespace Negocio
 
             try
             {
-                accesoDatos.setearConsulta("select A.Id, Codigo, Nombre, A.Descripcion, Precio, M.Id, M.Descripcion marca, C.Id, C.Descripcion categoria, IdMarca, IdCategoria from ARTICULOS A, MARCAS M, CATEGORIAS C where M.Id = A.IdMarca AND C.Id = A.IdCategoria;");
+                accesoDatos.setearConsulta("SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, M.Id IdMarca, M.Descripcion marca, C.Id IdCategoria, C.Descripcion categoria FROM ARTICULOS A LEFT JOIN MARCAS M ON A.IdMarca = M.Id LEFT JOIN CATEGORIAS C ON A.IdCategoria = C.Id;");
                 accesoDatos.ejecutarLectura();
 
                 while (accesoDatos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
+                    ImagenNegocio negocioImagenes = new ImagenNegocio();
                     aux.Id = (int)accesoDatos.Lector["Id"];
-                    aux.Codigo = (string) accesoDatos.Lector["codigo"];
-                    aux.Nombre = (string)accesoDatos.Lector["nombre"];
-                    aux.Descripcion = (string)accesoDatos.Lector["descripcion"];
-                    aux.Precio = (decimal) accesoDatos.Lector["precio"];
+                    if (!(accesoDatos.Lector["codigo"] is DBNull))
+                        aux.Codigo = (string)accesoDatos.Lector["codigo"];
+                    if (!(accesoDatos.Lector["nombre"] is DBNull))
+                        aux.Nombre = (string)accesoDatos.Lector["nombre"];
+                    if (!(accesoDatos.Lector["descripcion"] is DBNull))
+                        aux.Descripcion = (string)accesoDatos.Lector["descripcion"];
+                    if (!(accesoDatos.Lector["precio"] is DBNull))
+                        aux.Precio = (decimal)accesoDatos.Lector["precio"];
 
-                    aux.Marca = new Marca();
-                    aux.Marca.Id = (int)accesoDatos.Lector["IdMarca"];
-                    aux.Marca.Descripcion = (string)accesoDatos.Lector["marca"];
-                    aux.Categoria = new Categoria();
-                    aux.Categoria.Id = (int)accesoDatos.Lector["IdCategoria"];
-                    aux.Categoria.Descripcion = (string)accesoDatos.Lector["categoria"];
+                    if (!(accesoDatos.Lector["IdMarca"] is DBNull))
+                    {
+                        aux.Marca = new Marca();
+                        aux.Marca.Id = (int)accesoDatos.Lector["IdMarca"];
+                        if (!(accesoDatos.Lector["marca"] is DBNull))
+                            aux.Marca.Descripcion = (string)accesoDatos.Lector["marca"];
+                    }
+                    if (!(accesoDatos.Lector["IdCategoria"] is DBNull))
+                    {
+                        aux.Categoria = new Categoria();
+                        aux.Categoria.Id = (int)accesoDatos.Lector["IdCategoria"];
+                        if (!(accesoDatos.Lector["categoria"] is DBNull))
+                            aux.Categoria.Descripcion = (string)accesoDatos.Lector["categoria"];
+                    }
+
+                    aux.Imagenes = negocioImagenes.listar(aux.Id);
 
                     articulos.Add(aux);
                 }

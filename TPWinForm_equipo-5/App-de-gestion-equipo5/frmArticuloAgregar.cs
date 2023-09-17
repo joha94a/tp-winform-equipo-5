@@ -48,8 +48,14 @@ namespace App_de_gestion_equipo5
                     textBox_codigo.Text = articulo.Codigo;
                     textBox_nombre.Text = articulo.Nombre;
                     textBox_descrip.Text = articulo.Descripcion;
-                    cb_categoria.SelectedValue = articulo.Categoria.Id;
-                    cb_marca.SelectedValue = articulo.Marca.Id;
+                    if (articulo.Categoria != null)
+                        cb_categoria.SelectedValue = articulo.Categoria.Id;
+                    else
+                        cb_categoria.SelectedIndex = -1;
+                    if (articulo.Marca != null)
+                        cb_marca.SelectedValue = articulo.Marca.Id;
+                    else
+                        cb_marca.SelectedIndex = -1;
                     textBox_precio.Text = articulo.Precio.ToString();
 
                 }

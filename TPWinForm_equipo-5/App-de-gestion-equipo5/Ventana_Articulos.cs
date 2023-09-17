@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Negocio;
 using Dominio;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace App_de_gestion_equipo5
 {
@@ -66,6 +68,98 @@ namespace App_de_gestion_equipo5
                 MessageBox.Show(ex.ToString());
             }
 
+        }
+
+        private void dataGridV_articulos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridV_articulos.CurrentRow != null)
+            {
+                Articulo articuloSeleccionado = (Articulo)dataGridV_articulos.CurrentRow.DataBoundItem;
+                dgvImagenes.DataSource = null;
+                dgvImagenes.DataSource = articuloSeleccionado.Imagenes;
+                dgvImagenes.Columns["Id"].Visible = false;
+                dgvImagenes.Columns["ImagenUrl"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+
+            }
+        }
+
+        private void dgvImagenes_SelectionChanged(object sender, EventArgs e)
+        {
+            Imagen imagen;
+            try
+            {
+                if(dgvImagenes.CurrentRow != null)
+                {
+                    imagen = (Imagen)dgvImagenes.CurrentRow.DataBoundItem;
+                    pbxImagen.Load(imagen.ImagenUrl);
+                }
+            }
+            catch (Exception ex)
+            {
+                pbxImagen.Load("https://png.pngtree.com/png-vector/20210604/ourmid/pngtree-gray-network-placeholder-png-image_3416659.jpg");
+            }
+        }
+
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            if (dataGridV_articulos.CurrentRow != null)
+            {
+                Articulo articulo = (Articulo)dataGridV_articulos.CurrentRow.DataBoundItem;
+                frmImagenAgregar frmImagen = new frmImagenAgregar(articulo);
+                frmImagen.ShowDialog();
+                int indiceArticulos = dataGridV_articulos.CurrentRow.Index;
+                int indiceImagen = -1;
+                if (dgvImagenes.CurrentRow != null)
+                    indiceImagen = dgvImagenes.CurrentRow.Index;
+                cargar();
+                dataGridV_articulos.CurrentCell = dataGridV_articulos.Rows[indiceArticulos].Cells[0];
+                dataGridV_articulos_SelectionChanged(this, new EventArgs());
+                if (indiceImagen >= 0)
+                    dgvImagenes.CurrentCell = dgvImagenes.Rows[indiceImagen].Cells[1];
+                dgvImagenes_SelectionChanged(this, new EventArgs());
+            }
+            else
+            {
+                MessageBox.Show("Debe seleccionar un articulo.");
+            }
+        }
+
+        private void btnEliminarImagen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridV_articulos.CurrentRow != null)
+                {
+                    if (dgvImagenes.CurrentRow != null)
+                    {
+                        ImagenNegocio negocio = new ImagenNegocio();
+                        Imagen imagen = (Imagen)dgvImagenes.CurrentRow.DataBoundItem;
+                        DialogResult respuesta = MessageBox.Show("Está seguro que desea eliminar la imagen?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (respuesta == DialogResult.Yes)
+                        {
+                            negocio.eliminar(imagen.Id);
+                            MessageBox.Show("Imagen eliminada exitosamente.");
+                            int indiceArticulos = dataGridV_articulos.CurrentRow.Index;
+                            cargar();
+                            dataGridV_articulos.CurrentCell = dataGridV_articulos.Rows[indiceArticulos].Cells[0];
+                            dataGridV_articulos_SelectionChanged(this, new EventArgs());
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe seleccionar una imagen.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar un articulo.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
