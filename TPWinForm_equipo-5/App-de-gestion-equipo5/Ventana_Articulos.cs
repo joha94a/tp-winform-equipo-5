@@ -16,6 +16,10 @@ namespace App_de_gestion_equipo5
 {
     public partial class Ventana_Articulos : Form
     {
+        // Agrego control de indices de DGV para evitar que se disparen los eventos 'SelectionChanged' muchas veces y que no haga lenta la app
+        int indiceArticuloAnterior = -1;
+        int indiceImagenAnterior = -1;
+
         public Ventana_Articulos()
         {
             InitializeComponent();
@@ -72,15 +76,22 @@ namespace App_de_gestion_equipo5
 
         private void dataGridV_articulos_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridV_articulos.CurrentRow != null)
+            if (dataGridV_articulos.CurrentRow != null && indiceArticuloAnterior != dataGridV_articulos.CurrentRow.Index)
             {
+                indiceArticuloAnterior = dataGridV_articulos.CurrentRow.Index;
                 Articulo articuloSeleccionado = (Articulo)dataGridV_articulos.CurrentRow.DataBoundItem;
+                if (dgvImagenes.Rows.Count > 0)
+                    dgvImagenes.CurrentCell = dgvImagenes.Rows[0].Cells[1];
                 dgvImagenes.DataSource = null;
+
+                indiceImagenAnterior = -1;
                 dgvImagenes.DataSource = articuloSeleccionado.Imagenes;
+                if (articuloSeleccionado.Imagenes.Count == 0)
+                    pbxImagen.Image = null;
+                indiceImagenAnterior = -1;
+
                 dgvImagenes.Columns["Id"].Visible = false;
                 dgvImagenes.Columns["ImagenUrl"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-
             }
         }
 
@@ -89,11 +100,14 @@ namespace App_de_gestion_equipo5
             Imagen imagen;
             try
             {
-                if(dgvImagenes.CurrentRow != null)
+                if (dgvImagenes.CurrentRow != null && indiceImagenAnterior != dgvImagenes.CurrentRow.Index)
                 {
+                    indiceImagenAnterior = dgvImagenes.CurrentRow.Index;
                     imagen = (Imagen)dgvImagenes.CurrentRow.DataBoundItem;
                     pbxImagen.Load(imagen.ImagenUrl);
                 }
+                else if (dgvImagenes.CurrentRow == null)
+                    pbxImagen.Image = null;
             }
             catch (Exception ex)
             {
