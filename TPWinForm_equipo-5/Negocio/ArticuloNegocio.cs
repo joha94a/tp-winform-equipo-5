@@ -118,5 +118,26 @@ namespace Negocio
                  accesoDatos.cerrarConexion();
             }
         }
+
+        public void eliminar(int id)
+        {
+
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            try
+            {
+                accesoDatos.setearConsulta("DELETE FROM ARTICULOS WHERE Id = @Id");
+                accesoDatos.setearParametro("Id", id);
+                accesoDatos.ejecutarAccion();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
     }
 }

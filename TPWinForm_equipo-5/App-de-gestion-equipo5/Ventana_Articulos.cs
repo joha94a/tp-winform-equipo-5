@@ -161,5 +161,38 @@ namespace App_de_gestion_equipo5
                 MessageBox.Show(ex.Message);
             }
         }
-    }
+
+        private void button_eliminar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+            Articulo articuloSeleccionado;
+            ImagenNegocio imagenNegocio = new ImagenNegocio();
+
+            try
+            {
+                DialogResult respuesta = MessageBox.Show("¿Esta seguro? Este registro se eliminará para siempre", "Elimiar articulo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (respuesta == DialogResult.Yes)
+                {
+                    try
+                    {
+                        articuloSeleccionado = (Articulo)dataGridV_articulos.CurrentRow.DataBoundItem;
+                        imagenNegocio.eliminarTodas(articuloSeleccionado.Id);
+                        articuloNegocio.eliminar(articuloSeleccionado.Id);
+                        MessageBox.Show("Eliminado exitosamente");
+                        cargar();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+         }
+
+     }
 }

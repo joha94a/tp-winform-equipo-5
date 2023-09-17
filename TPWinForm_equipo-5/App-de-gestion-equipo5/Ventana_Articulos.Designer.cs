@@ -52,7 +52,7 @@
             this.button_cerrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.button_cerrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_cerrar.ForeColor = System.Drawing.Color.White;
-            this.button_cerrar.Location = new System.Drawing.Point(973, 840);
+            this.button_cerrar.Location = new System.Drawing.Point(973, 725);
             this.button_cerrar.Name = "button_cerrar";
             this.button_cerrar.Size = new System.Drawing.Size(100, 42);
             this.button_cerrar.TabIndex = 0;
@@ -74,7 +74,7 @@
             this.dataGridV_articulos.MultiSelect = false;
             this.dataGridV_articulos.Name = "dataGridV_articulos";
             this.dataGridV_articulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridV_articulos.Size = new System.Drawing.Size(663, 666);
+            this.dataGridV_articulos.Size = new System.Drawing.Size(663, 551);
             this.dataGridV_articulos.TabIndex = 1;
             this.dataGridV_articulos.SelectionChanged += new System.EventHandler(this.dataGridV_articulos_SelectionChanged);
             // 
@@ -84,7 +84,7 @@
             this.button_detalles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.button_detalles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_detalles.ForeColor = System.Drawing.Color.White;
-            this.button_detalles.Location = new System.Drawing.Point(54, 840);
+            this.button_detalles.Location = new System.Drawing.Point(54, 725);
             this.button_detalles.Name = "button_detalles";
             this.button_detalles.Size = new System.Drawing.Size(100, 42);
             this.button_detalles.TabIndex = 2;
@@ -97,7 +97,7 @@
             this.button_modificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.button_modificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_modificar.ForeColor = System.Drawing.Color.White;
-            this.button_modificar.Location = new System.Drawing.Point(172, 840);
+            this.button_modificar.Location = new System.Drawing.Point(172, 725);
             this.button_modificar.Name = "button_modificar";
             this.button_modificar.Size = new System.Drawing.Size(100, 42);
             this.button_modificar.TabIndex = 3;
@@ -111,12 +111,13 @@
             this.button_eliminar.BackColor = System.Drawing.Color.Tomato;
             this.button_eliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_eliminar.ForeColor = System.Drawing.Color.White;
-            this.button_eliminar.Location = new System.Drawing.Point(290, 840);
+            this.button_eliminar.Location = new System.Drawing.Point(290, 725);
             this.button_eliminar.Name = "button_eliminar";
             this.button_eliminar.Size = new System.Drawing.Size(100, 42);
             this.button_eliminar.TabIndex = 4;
             this.button_eliminar.Text = "ELIMINAR";
             this.button_eliminar.UseVisualStyleBackColor = false;
+            this.button_eliminar.Click += new System.EventHandler(this.button_eliminar_Click);
             // 
             // panel_titulo
             // 
@@ -167,7 +168,7 @@
             this.dgvImagenes.Name = "dgvImagenes";
             this.dgvImagenes.RowHeadersVisible = false;
             this.dgvImagenes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvImagenes.Size = new System.Drawing.Size(350, 278);
+            this.dgvImagenes.Size = new System.Drawing.Size(350, 163);
             this.dgvImagenes.TabIndex = 7;
             this.dgvImagenes.SelectionChanged += new System.EventHandler(this.dgvImagenes_SelectionChanged);
             // 
@@ -217,7 +218,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1095, 903);
+            this.ClientSize = new System.Drawing.Size(1095, 788);
             this.Controls.Add(this.btnEliminarImagen);
             this.Controls.Add(this.btnAgregarImagen);
             this.Controls.Add(this.pbxImagen);
