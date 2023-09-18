@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Negocio
 {
@@ -49,10 +50,20 @@ namespace Negocio
                 string consulta;
                 if(obj.Id == 0)
                 {
+                    if(validarExistencia(obj.Descripcion).Count > 0)
+                    {
+                        MessageBox.Show("Descripcion existente.");
+                        return false;
+                    }
                     consulta = "INSERT INTO CATEGORIAS (Descripcion) VALUES ('" + obj.Descripcion + "')";
                 }
                 else
                 {
+                    if(validarExistencia(obj.Descripcion, obj.Id).Count > 0)
+                    {
+                        MessageBox.Show("Descripcion existente.");
+                        return false;
+                    }
                     consulta = "UPDATE CATEGORIAS SET Descripcion = '"+obj.Descripcion+"' WHERE Id = "+ obj.Id;
                 }
                 accesoDatos.setearConsulta(consulta);
@@ -88,6 +99,75 @@ namespace Negocio
             finally
             {
                 accesoDatos.cerrarConexion();
+            }
+        }
+
+        public List<Categoria> validarExistencia(string descripcion)
+        {
+            List<Categoria> lista = new List<Categoria>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT Id, Descripcion FROM CATEGORIAS WHERE Descripcion = @desc;");
+                datos.setearParametro("@desc", descripcion);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Categoria categoria = new Categoria();
+
+                    categoria.Id = (int)datos.Lector["Id"];
+                    if (!(datos.Lector["Descripcion"] is DBNull))
+                        categoria.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    lista.Add(categoria);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<Categoria> validarExistencia(string descripcion, int id)
+        {
+            List<Categoria> lista = new List<Categoria>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT Id, Descripcion FROM CATEGORIAS WHERE Descripcion = @desc AND Id <> @id;");
+                datos.setearParametro("@desc", descripcion);
+                datos.setearParametro("@id", id);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Categoria categoria = new Categoria();
+
+                    categoria.Id = (int)datos.Lector["Id"];
+                    if (!(datos.Lector["Descripcion"] is DBNull))
+                        categoria.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    lista.Add(categoria);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }

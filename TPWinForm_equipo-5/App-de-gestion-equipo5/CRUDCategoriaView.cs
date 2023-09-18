@@ -38,6 +38,7 @@ namespace App_de_gestion_equipo5
             CategoriaNegocio negocio = new CategoriaNegocio();
 
             obj.Descripcion = txtDescripcion.Text;
+
             bool guardo = negocio.Save(obj);
 
             if(guardo)
@@ -67,5 +68,6 @@ namespace App_de_gestion_equipo5
         {
             this.Close();
         }
+
     }
 }

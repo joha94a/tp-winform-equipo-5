@@ -103,5 +103,72 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public List<Marca> validarExistencia(string descripcion)
+        {
+            List<Marca> lista = new List<Marca>();
+
+            try
+            {
+                datos.setearConsulta("SELECT Id, Descripcion FROM MARCAS WHERE Descripcion = @desc;");
+                datos.setearParametro("@desc", descripcion);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Marca marca = new Marca();
+
+                    marca.Id = (int)datos.Lector["Id"];
+                    if (!(datos.Lector["Descripcion"] is DBNull))
+                        marca.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    lista.Add(marca);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<Marca> validarExistencia(string descripcion,int id)
+        {
+            List<Marca> lista = new List<Marca>();
+
+            try
+            {
+                datos.setearConsulta("SELECT Id, Descripcion FROM MARCAS WHERE Descripcion = @desc AND Id <> @id;");
+                datos.setearParametro("@desc", descripcion);
+                datos.setearParametro("@id", id);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Marca marca = new Marca();
+
+                    marca.Id = (int)datos.Lector["Id"];
+                    if (!(datos.Lector["Descripcion"] is DBNull))
+                        marca.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    lista.Add(marca);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

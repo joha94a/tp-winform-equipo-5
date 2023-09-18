@@ -75,11 +75,15 @@ namespace App_de_gestion_equipo5
 
                 if (marca.Id != 0)
                 {
+                    if (validarCarga(marca,false))
+                        return;
                     negocio.modificar(marca);
                     MessageBox.Show("Modificado exitosamente.");
                 }
                 else
                 {
+                    if (validarCarga(marca,true))
+                        return;
                     negocio.agregar(marca);
                     MessageBox.Show("Agregado exitosamente.");
                 }
@@ -89,6 +93,30 @@ namespace App_de_gestion_equipo5
             {
                 throw ex;
             }
+        }
+
+        private bool validarCarga(Marca marca, bool insert)
+        {
+            if (txtDescripcion.Text == "")
+            {
+                MessageBox.Show("Debe ingresar una descripcion.");
+                return true;
+            }
+            MarcaNegocio negocio = new MarcaNegocio();
+            
+            if (insert && negocio.validarExistencia(marca.Descripcion).Count > 0)
+            {
+                MessageBox.Show("Descripcion existente.");
+                return true;
+            }
+
+            if (!(insert) && negocio.validarExistencia(marca.Descripcion, marca.Id).Count > 0)
+            {
+                MessageBox.Show("Descripcion existente.");
+                return true;
+            }
+
+            return false;
         }
     }
 }
