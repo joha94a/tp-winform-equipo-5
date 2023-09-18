@@ -40,6 +40,13 @@
             this.pbxImagen = new System.Windows.Forms.PictureBox();
             this.btnAgregarImagen = new System.Windows.Forms.Button();
             this.btnEliminarImagen = new System.Windows.Forms.Button();
+            this.label_filtrar = new System.Windows.Forms.Label();
+            this.cb_filtro_campo = new System.Windows.Forms.ComboBox();
+            this.cb_filtro_criterio = new System.Windows.Forms.ComboBox();
+            this.textBox_filtro = new System.Windows.Forms.TextBox();
+            this.button_buscar = new System.Windows.Forms.Button();
+            this.label_cod_precio = new System.Windows.Forms.Label();
+            this.button_limpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridV_articulos)).BeginInit();
             this.panel_titulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvImagenes)).BeginInit();
@@ -97,7 +104,7 @@
             this.button_modificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.button_modificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_modificar.ForeColor = System.Drawing.Color.White;
-            this.button_modificar.Location = new System.Drawing.Point(172, 725);
+            this.button_modificar.Location = new System.Drawing.Point(171, 725);
             this.button_modificar.Name = "button_modificar";
             this.button_modificar.Size = new System.Drawing.Size(100, 42);
             this.button_modificar.TabIndex = 3;
@@ -111,7 +118,7 @@
             this.button_eliminar.BackColor = System.Drawing.Color.Tomato;
             this.button_eliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_eliminar.ForeColor = System.Drawing.Color.White;
-            this.button_eliminar.Location = new System.Drawing.Point(290, 725);
+            this.button_eliminar.Location = new System.Drawing.Point(617, 725);
             this.button_eliminar.Name = "button_eliminar";
             this.button_eliminar.Size = new System.Drawing.Size(100, 42);
             this.button_eliminar.TabIndex = 4;
@@ -146,7 +153,7 @@
             this.button_agregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.button_agregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_agregar.ForeColor = System.Drawing.Color.White;
-            this.button_agregar.Location = new System.Drawing.Point(54, 118);
+            this.button_agregar.Location = new System.Drawing.Point(466, 725);
             this.button_agregar.Name = "button_agregar";
             this.button_agregar.Size = new System.Drawing.Size(100, 42);
             this.button_agregar.TabIndex = 6;
@@ -214,11 +221,91 @@
             this.btnEliminarImagen.UseVisualStyleBackColor = false;
             this.btnEliminarImagen.Click += new System.EventHandler(this.btnEliminarImagen_Click);
             // 
+            // label_filtrar
+            // 
+            this.label_filtrar.AutoSize = true;
+            this.label_filtrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_filtrar.Location = new System.Drawing.Point(51, 130);
+            this.label_filtrar.Name = "label_filtrar";
+            this.label_filtrar.Size = new System.Drawing.Size(69, 16);
+            this.label_filtrar.TabIndex = 11;
+            this.label_filtrar.Text = "Filtrar por: ";
+            // 
+            // cb_filtro_campo
+            // 
+            this.cb_filtro_campo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_filtro_campo.FormattingEnabled = true;
+            this.cb_filtro_campo.Location = new System.Drawing.Point(132, 129);
+            this.cb_filtro_campo.Name = "cb_filtro_campo";
+            this.cb_filtro_campo.Size = new System.Drawing.Size(121, 21);
+            this.cb_filtro_campo.TabIndex = 12;
+            this.cb_filtro_campo.SelectedIndexChanged += new System.EventHandler(this.cb_filtro_campo_SelectedIndexChanged);
+            // 
+            // cb_filtro_criterio
+            // 
+            this.cb_filtro_criterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_filtro_criterio.FormattingEnabled = true;
+            this.cb_filtro_criterio.Location = new System.Drawing.Point(265, 130);
+            this.cb_filtro_criterio.Name = "cb_filtro_criterio";
+            this.cb_filtro_criterio.Size = new System.Drawing.Size(121, 21);
+            this.cb_filtro_criterio.TabIndex = 13;
+            this.cb_filtro_criterio.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // textBox_filtro
+            // 
+            this.textBox_filtro.Enabled = false;
+            this.textBox_filtro.Location = new System.Drawing.Point(452, 131);
+            this.textBox_filtro.Name = "textBox_filtro";
+            this.textBox_filtro.Size = new System.Drawing.Size(100, 20);
+            this.textBox_filtro.TabIndex = 14;
+            // 
+            // button_buscar
+            // 
+            this.button_buscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.button_buscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_buscar.ForeColor = System.Drawing.Color.White;
+            this.button_buscar.Location = new System.Drawing.Point(564, 127);
+            this.button_buscar.Name = "button_buscar";
+            this.button_buscar.Size = new System.Drawing.Size(86, 31);
+            this.button_buscar.TabIndex = 15;
+            this.button_buscar.Text = "BUSCAR";
+            this.button_buscar.UseVisualStyleBackColor = false;
+            this.button_buscar.Click += new System.EventHandler(this.button_buscar_Click);
+            // 
+            // label_cod_precio
+            // 
+            this.label_cod_precio.AutoSize = true;
+            this.label_cod_precio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_cod_precio.Location = new System.Drawing.Point(398, 132);
+            this.label_cod_precio.Name = "label_cod_precio";
+            this.label_cod_precio.Size = new System.Drawing.Size(42, 16);
+            this.label_cod_precio.TabIndex = 16;
+            this.label_cod_precio.Text = "Valor:";
+            // 
+            // button_limpiar
+            // 
+            this.button_limpiar.BackColor = System.Drawing.Color.Tomato;
+            this.button_limpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_limpiar.ForeColor = System.Drawing.Color.White;
+            this.button_limpiar.Location = new System.Drawing.Point(662, 127);
+            this.button_limpiar.Name = "button_limpiar";
+            this.button_limpiar.Size = new System.Drawing.Size(86, 31);
+            this.button_limpiar.TabIndex = 17;
+            this.button_limpiar.Text = "LIMPIAR";
+            this.button_limpiar.UseVisualStyleBackColor = false;
+            // 
             // Ventana_Articulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1095, 788);
+            this.Controls.Add(this.button_limpiar);
+            this.Controls.Add(this.label_cod_precio);
+            this.Controls.Add(this.button_buscar);
+            this.Controls.Add(this.textBox_filtro);
+            this.Controls.Add(this.cb_filtro_criterio);
+            this.Controls.Add(this.cb_filtro_campo);
+            this.Controls.Add(this.label_filtrar);
             this.Controls.Add(this.btnEliminarImagen);
             this.Controls.Add(this.btnAgregarImagen);
             this.Controls.Add(this.pbxImagen);
@@ -241,6 +328,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvImagenes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImagen)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -258,5 +346,12 @@
         private System.Windows.Forms.PictureBox pbxImagen;
         private System.Windows.Forms.Button btnAgregarImagen;
         private System.Windows.Forms.Button btnEliminarImagen;
+        private System.Windows.Forms.Label label_filtrar;
+        private System.Windows.Forms.ComboBox cb_filtro_campo;
+        private System.Windows.Forms.ComboBox cb_filtro_criterio;
+        private System.Windows.Forms.TextBox textBox_filtro;
+        private System.Windows.Forms.Button button_buscar;
+        private System.Windows.Forms.Label label_cod_precio;
+        private System.Windows.Forms.Button button_limpiar;
     }
 }

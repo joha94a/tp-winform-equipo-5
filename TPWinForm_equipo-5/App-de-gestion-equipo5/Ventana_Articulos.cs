@@ -11,6 +11,8 @@ using Negocio;
 using Dominio;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Linq.Expressions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace App_de_gestion_equipo5
 {
@@ -34,6 +36,10 @@ namespace App_de_gestion_equipo5
         private void Ventana_Articulos_Load(object sender, EventArgs e)
         {
             cargar();
+            cb_filtro_campo.Items.Add("Código");
+            cb_filtro_campo.Items.Add("Marca");
+            cb_filtro_campo.Items.Add("Categoria");
+            cb_filtro_campo.Items.Add("Precio");
 
         }
 
@@ -64,6 +70,8 @@ namespace App_de_gestion_equipo5
                 dataGridV_articulos.Columns["descripcion"].Visible = false;
                 dataGridV_articulos.Columns["marca"].Visible = false;
                 dataGridV_articulos.Columns["categoria"].Visible = false;
+                dataGridV_articulos.Columns["id"].Visible = false;
+
 
                 dataGridV_articulos.Columns["precio"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
@@ -208,5 +216,105 @@ namespace App_de_gestion_equipo5
 
          }
 
-     }
+        private void cb_filtro_campo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcion = cb_filtro_campo.SelectedItem.ToString();
+            List<Articulo> listaArticulos;
+            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+            MarcaNegocio marcaNegocio = new MarcaNegocio();
+
+            List<Categoria>listaCategorias = categoriaNegocio.GetAll();
+            List<Marca> listaMarcas = marcaNegocio.listar();
+            listaArticulos = articuloNegocio.listarArticulos();
+
+            if (opcion == "Código")
+            {
+                cb_filtro_criterio.Items.Clear();
+                textBox_filtro.Enabled = true;
+                
+            }
+            else if(opcion == "Marca")
+            {
+                cb_filtro_criterio.Items.Clear();
+                textBox_filtro.Enabled = false;
+                textBox_filtro.Text = "";
+
+                foreach (var item in listaMarcas)
+                {
+                    cb_filtro_criterio.Items.Add(item.Descripcion);
+                }
+            }
+            else if (opcion == "Categoria")
+            {
+                cb_filtro_criterio.Items.Clear();
+                //cb_filtro_criterio.SelectedIndex = 0;
+                textBox_filtro.Enabled = false;
+                textBox_filtro.Text = "";
+                foreach (var item in listaCategorias)
+                {
+                    cb_filtro_criterio.Items.Add(item.Descripcion);
+                }
+            }
+            else if (opcion == "Precio")
+            {
+                textBox_filtro.Enabled = true;
+                cb_filtro_criterio.Items.Clear();
+                cb_filtro_criterio.Items.Add("Igual a");
+                cb_filtro_criterio.Items.Add("Menor a");
+                cb_filtro_criterio.Items.Add("Mayor a");
+            }
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
+
+        }
+
+        private void button_buscar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+
+            try
+            {
+                string campo = cb_filtro_campo.SelectedItem.ToString();
+                if(campo == "Precio" && textBox_filtro.Text == "")
+                {
+                    MessageBox.Show("Se debe ingresar un valor");
+                    return;
+                }
+                string criterio = null, valor = null;
+
+                if(cb_filtro_criterio.SelectedItem == null)
+                {
+                    
+                    criterio = "";
+                }
+                else
+                {
+                    criterio = cb_filtro_criterio.SelectedItem.ToString();
+                }
+
+                if(textBox_filtro.Text == null)
+                {
+                    valor = "";
+                }
+                else
+                {
+                    valor = textBox_filtro.Text;
+                }
+                
+                dataGridV_articulos.DataSource = articuloNegocio.filtrar(campo, criterio, valor);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        
+        }
+
+    }
 }
