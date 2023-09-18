@@ -80,12 +80,17 @@ namespace App_de_gestion_equipo5
                     agregar = true;
                 }
 
+                if (validarCampos())
+                    return;
+
                 articulo.Codigo = textBox_codigo.Text;
                 articulo.Nombre = textBox_nombre.Text;
                 articulo.Descripcion = textBox_descrip.Text;
                 articulo.Categoria = (Categoria) cb_categoria.SelectedItem;
                 articulo.Marca = (Marca) cb_marca.SelectedItem;
+
                 articulo.Precio = decimal.Parse(textBox_precio.Text);
+
 
                 if (agregar)
                 {
@@ -114,6 +119,32 @@ namespace App_de_gestion_equipo5
         private void button_cancelar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private bool validarCampos()
+        {
+            if (textBox_codigo.Text == "")
+            {
+                MessageBox.Show("Debe completar el codigo");
+                return true;
+            }
+            if (textBox_nombre.Text == "")
+            {
+                MessageBox.Show("Debe completar el nombre del articulo");
+                return true;
+            }
+            if (textBox_precio.Text == "")
+            {
+                MessageBox.Show("Se debe ingresar un valor");
+                return true;
+            }
+            if (!decimal.TryParse(textBox_precio.Text, out decimal d))
+            {
+                MessageBox.Show("Se debe ingresar un valor numérico en el precio");
+                return true;
+            }
+
+            return false;
         }
     }
 }
