@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -65,17 +66,37 @@ namespace App_de_gestion_equipo5
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             Categoria cat;
-            cat = (Categoria)dgvCategoria.CurrentRow.DataBoundItem;
-            //if (ValidarCategoriaEnUso(cat))
-            //{
-            //    MessageBox.Show("La categoría que intenta eliminar está siendo utilizada por un artículo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //}
-            DialogResult dr = MessageBox.Show("¿Está seguro que desea eliminar este registro?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if(dr == DialogResult.Yes)
+            ArticuloNegocio negocioArticulo = new ArticuloNegocio();
+            List<Articulo> listaArticulos;
+            try
             {
-                CategoriaNegocio negocio = new CategoriaNegocio();
-                negocio.Delete(cat);
-                LoadGrid();
+                if (dgvCategoria.CurrentRow != null)
+                {
+                    cat = (Categoria)dgvCategoria.CurrentRow.DataBoundItem;
+                    listaArticulos = negocioArticulo.listarPorCategoria(cat);
+                    if (listaArticulos.Count == 0)
+                    {
+                        DialogResult dr = MessageBox.Show("¿Está seguro que desea eliminar este registro?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (dr == DialogResult.Yes)
+                        {
+                            CategoriaNegocio negocio = new CategoriaNegocio();
+                            negocio.Delete(cat);
+                            LoadGrid();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Imposible eliminar, existen articulos con la categoria seleccionada.","", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe seleccionar una fila.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 

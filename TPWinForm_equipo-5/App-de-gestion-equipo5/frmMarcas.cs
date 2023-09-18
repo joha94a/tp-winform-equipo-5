@@ -121,18 +121,28 @@ namespace App_de_gestion_equipo5
         {
             MarcaNegocio negocio = new MarcaNegocio();
             Marca marca;
+            ArticuloNegocio negocioArticulo = new ArticuloNegocio();
+            List<Articulo> listaArticulos;
             try
             {
                 if (dgvMarcas.CurrentRow != null)
                 {
                     marca = (Marca)dgvMarcas.CurrentRow.DataBoundItem;
-                    DialogResult respuesta = MessageBox.Show("Está seguro que desea eliminar?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if(respuesta == DialogResult.Yes)
+                    listaArticulos = negocioArticulo.listarPorMarca(marca);
+                    if(listaArticulos.Count == 0)
                     {
-                        negocio.eliminar(marca.Id);
-                        MessageBox.Show("Marca eliminada exitosamente.");
-                        cargarMarcas();
-                        filtrarMarcas();
+                        DialogResult respuesta = MessageBox.Show("Está seguro que desea eliminar?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (respuesta == DialogResult.Yes)
+                        {
+                            negocio.eliminar(marca.Id);
+                            MessageBox.Show("Marca eliminada exitosamente.");
+                            cargarMarcas();
+                            filtrarMarcas();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Imposible eliminar, existen articulos con la marca seleccionada.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
                 else
