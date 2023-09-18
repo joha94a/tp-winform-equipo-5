@@ -89,11 +89,15 @@ namespace App_de_gestion_equipo5
 
                 if (agregar)
                 {
+                    bool validacion = articuloNegocio.validarCodigo(articulo.Codigo);
+                    if (!validacion) { MessageBox.Show("No se puede repetir el código"); return; }
                     articuloNegocio.agregar(articulo);
                     MessageBox.Show("Artículo agregado exitosamente");
                 }
                 else
                 {
+                    bool validacion = articuloNegocio.validarCodigo(articulo.Codigo);
+                    if (!validacion) { MessageBox.Show("No se puede repetir el código"); return; }
                     articuloNegocio.modificar(articulo);
                     MessageBox.Show("Artículo modificado exitosamente");
                 }

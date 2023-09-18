@@ -337,5 +337,31 @@ namespace Negocio
                 accesoDatos.cerrarConexion();
             }
         }
+
+        public bool validarCodigo(string codigo)
+        {
+            AccesoDatos accesoDatos = new AccesoDatos();
+
+            try
+            {
+                accesoDatos.setearConsulta("SELECT * from ARTICULOS WHERE codigo = @codigo");
+                accesoDatos.setearParametro("@codigo", codigo);
+                accesoDatos.ejecutarLectura();
+
+                if (accesoDatos.Lector.HasRows)
+                {
+                    return false;
+                }
+                else return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
     }
 }
