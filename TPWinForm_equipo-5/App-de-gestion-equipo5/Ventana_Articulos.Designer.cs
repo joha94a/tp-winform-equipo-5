@@ -97,6 +97,7 @@
             this.button_detalles.TabIndex = 2;
             this.button_detalles.Text = "VER";
             this.button_detalles.UseVisualStyleBackColor = false;
+            this.button_detalles.Click += new System.EventHandler(this.button_detalles_Click);
             // 
             // button_modificar
             // 

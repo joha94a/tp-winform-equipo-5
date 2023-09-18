@@ -316,5 +316,12 @@ namespace App_de_gestion_equipo5
         
         }
 
+        private void button_detalles_Click(object sender, EventArgs e)
+        {
+            Articulo articulo;
+            articulo = (Articulo)dataGridV_articulos.CurrentRow.DataBoundItem;
+            frmArticuloDetalle detalle = new frmArticuloDetalle(articulo);
+            detalle.ShowDialog();
+        }
     }
 }
