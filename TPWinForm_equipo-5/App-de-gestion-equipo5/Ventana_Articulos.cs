@@ -19,8 +19,8 @@ namespace App_de_gestion_equipo5
     public partial class Ventana_Articulos : Form
     {
         // Agrego control de indices de DGV para evitar que se disparen los eventos 'SelectionChanged' muchas veces y que no haga lenta la app
-        int indiceArticuloAnterior = -1;
-        int indiceImagenAnterior = -1;
+        int indiceArticuloAnterior;
+        int indiceImagenAnterior;
 
         public Ventana_Articulos()
         {
@@ -66,6 +66,8 @@ namespace App_de_gestion_equipo5
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
             try
             {
+                indiceArticuloAnterior = -1;
+                indiceImagenAnterior = -1;
                 dataGridV_articulos.DataSource = articuloNegocio.listarArticulos();
                 dataGridV_articulos.Columns["descripcion"].Visible = false;
                 dataGridV_articulos.Columns["marca"].Visible = false;
@@ -105,10 +107,16 @@ namespace App_de_gestion_equipo5
 
         private void dgvImagenes_SelectionChanged(object sender, EventArgs e)
         {
+            if (dgvImagenes.CurrentRow != null && indiceImagenAnterior != dgvImagenes.CurrentRow.Index)
+                cargarImagen();
+        }
+
+        private void cargarImagen()
+        {
             Imagen imagen;
             try
             {
-                if (dgvImagenes.CurrentRow != null && indiceImagenAnterior != dgvImagenes.CurrentRow.Index)
+                if (dgvImagenes.CurrentRow != null)
                 {
                     indiceImagenAnterior = dgvImagenes.CurrentRow.Index;
                     imagen = (Imagen)dgvImagenes.CurrentRow.DataBoundItem;
@@ -280,6 +288,8 @@ namespace App_de_gestion_equipo5
 
             try
             {
+                if (cb_filtro_campo.SelectedItem == null)
+                    return;
                 string campo = cb_filtro_campo.SelectedItem.ToString();
                 if(campo == "Precio" && textBox_filtro.Text == "")
                 {
@@ -306,8 +316,19 @@ namespace App_de_gestion_equipo5
                 {
                     valor = textBox_filtro.Text;
                 }
-                
                 dataGridV_articulos.DataSource = articuloNegocio.filtrar(campo, criterio, valor);
+                indiceArticuloAnterior = -1;
+                indiceImagenAnterior = -1;
+                dataGridV_articulos.CurrentCell = null;
+                dgvImagenes.CurrentCell = null;
+                if (dataGridV_articulos.Rows.Count > 0)
+                {
+                    dataGridV_articulos.CurrentCell = dataGridV_articulos.Rows[0].Cells[1];
+                }
+                if (dgvImagenes.Rows.Count > 0)
+                {
+                    dgvImagenes.CurrentCell = dgvImagenes.Rows[0].Cells[1];
+                }
             }
             catch(Exception ex)
             {
@@ -322,6 +343,31 @@ namespace App_de_gestion_equipo5
             articulo = (Articulo)dataGridV_articulos.CurrentRow.DataBoundItem;
             frmArticuloDetalle detalle = new frmArticuloDetalle(articulo);
             detalle.ShowDialog();
+        }
+
+        private void button_limpiar_Click(object sender, EventArgs e)
+        {
+            cb_filtro_campo.Items.Clear();
+            cb_filtro_campo.Items.Add("Código");
+            cb_filtro_campo.Items.Add("Marca");
+            cb_filtro_campo.Items.Add("Categoria");
+            cb_filtro_campo.Items.Add("Precio");
+            cb_filtro_criterio.Items.Clear();
+            textBox_filtro.Enabled = false;
+            textBox_filtro.Text = "";
+            cargar();
+            indiceArticuloAnterior = -1;
+            indiceImagenAnterior = -1;
+            dataGridV_articulos.CurrentCell = null;
+            dgvImagenes.CurrentCell = null;
+            if (dataGridV_articulos.Rows.Count > 0)
+            {
+                dataGridV_articulos.CurrentCell = dataGridV_articulos.Rows[0].Cells[1];
+            }
+            if (dgvImagenes.Rows.Count > 0)
+            {
+                dgvImagenes.CurrentCell = dgvImagenes.Rows[0].Cells[1];
+            }
         }
     }
 }

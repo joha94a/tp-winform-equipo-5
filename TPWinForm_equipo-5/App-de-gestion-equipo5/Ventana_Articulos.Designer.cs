@@ -295,6 +295,7 @@
             this.button_limpiar.TabIndex = 17;
             this.button_limpiar.Text = "LIMPIAR";
             this.button_limpiar.UseVisualStyleBackColor = false;
+            this.button_limpiar.Click += new System.EventHandler(this.button_limpiar_Click);
             // 
             // Ventana_Articulos
             // 
