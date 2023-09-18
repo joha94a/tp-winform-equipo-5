@@ -291,11 +291,19 @@ namespace App_de_gestion_equipo5
                 if (cb_filtro_campo.SelectedItem == null)
                     return;
                 string campo = cb_filtro_campo.SelectedItem.ToString();
-                if(campo == "Precio" && textBox_filtro.Text == "")
+                if(campo == "Precio")
                 {
-                    MessageBox.Show("Se debe ingresar un valor");
-                    return;
-                }
+                    if(textBox_filtro.Text == "")
+                    {
+                        MessageBox.Show("Se debe ingresar un valor");
+                        return;
+                    }
+                    if (!decimal.TryParse(textBox_filtro.Text, out decimal d))
+                    {
+                        MessageBox.Show("Se debe ingresar un valor numérico");
+                        return;
+                    }
+                } 
                 string criterio = null, valor = null;
 
                 if(cb_filtro_criterio.SelectedItem == null)
